@@ -26,6 +26,9 @@ def main() -> int:
     if "\n" in ENTRY or "\r" in ENTRY:
         print("entry must be a single line", file=sys.stderr)
         return 1
+    if not ENTRY.isprintable():
+        print("entry contains non-printable characters", file=sys.stderr)
+        return 1
 
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
     os.makedirs(out_dir, exist_ok=True)
